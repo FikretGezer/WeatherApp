@@ -2,16 +2,17 @@
 <html>
     <head>
         <title>Weather App</title>
+        <link class="title-icon" rel="icon" href="images/drizzle.png">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="card">
             <div class="search">
-                <input type="text" placeholder="City" spellcheck="false">
+                <input type="text" placeholder="Şehir" spellcheck="false">
                 <button><img src="images/search.png"></button>
             </div>
             <div class="error">
-                <p>Invalid city name</p>
+                <p>Geçersiz şehir ismi</p>
             </div>
             <div class="weather">
                 <img src="images/rain.png" class="weather-icon">
@@ -22,14 +23,14 @@
                         <img src="images/humidity.png">
                         <div>
                             <p class="humidity">50%</p>
-                            <p>Humidity</p>
+                            <p>Nem</p>
                         </div>
                     </div>
                     <div class="col">
                         <img src="images/wind.png">
                         <div>
                             <p class="wind">15 km/h</p>
-                            <p>Wind Speed</p>
+                            <p>Rüzgar Hızı</p>
                         </div>
                     </div>
                 </div>
@@ -40,7 +41,8 @@
             const apiURL = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
             const searchBox = document.querySelector(".search input");
-            const searchBtn = document.querySelector(".search button");
+
+            const titleIcon = document.querySelector('.title-icon');
 
             async function checkWeather(city)
             {
@@ -63,11 +65,11 @@
                     document.querySelector('.city').innerHTML = data.name;
                     document.querySelector('.humidity').innerHTML = data.main.humidity + "%";
                     document.querySelector('.wind').innerHTML = windSpeedAfterDot > 50 ? Math.round(data.wind.speed) + " km/h" : Math.floor(data.wind.speed) + " km/h";
-                    document.querySelector('.weather img').src = `images/${data.weather[0].main.toString().toLowerCase()}.png`;
-
+                    document.querySelector('.weather img').src = titleIcon.href = `images/${data.weather[0].main.toString().toLowerCase()}.png`;
 
                     document.querySelector('.error').style.display = "none";
                     document.querySelector('.weather').style.display = "block";
+
                 }
             }
             searchBox.addEventListener('keypress', event => {
@@ -88,6 +90,5 @@
                 }
             });
         </script>
-        <!-- https://api.openweathermap.org/data/2.5/weather?q=istanbul&appid=78653353432cd561621ef7b7767bfbe2&units=metric -->
     </body>
 </html>
